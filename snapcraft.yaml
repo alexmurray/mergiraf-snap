@@ -1,0 +1,32 @@
+name: mergiraf
+base: core24
+version: 0.3.0
+summary: A syntax-aware git merge driver
+description: |
+  Mergiraf can solve [a wide range of Git merge
+  conflicts](https://mergiraf.org/conflicts.html). That's because it's aware of
+  the trees in your files!
+
+  Thanks to [its understanding of your
+  language](https://mergiraf.org/languages.html), it can often reconcile the
+  needs of both sides.
+
+  You can [teach Mergiraf a new
+  language](https://mergiraf.org/adding-a-language.html) in a completely
+  declarative way. It's a nonviolent animal, so it prefers that over
+  imperatives.
+
+grade: stable
+confinement: strict
+
+apps:
+  mergiraf:
+    command: bin/mergiraf
+    plugs:
+      - home
+
+parts:
+  mergiraf:
+    plugin: rust
+    source: https://codeberg.org/mergiraf/mergiraf.git
+    source-tag: v$SNAPCRAFT_PROJECT_VERSION
