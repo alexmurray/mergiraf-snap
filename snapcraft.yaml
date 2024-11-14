@@ -15,6 +15,11 @@ description: |
   language](https://mergiraf.org/adding-a-language.html) in a completely
   declarative way. It's a nonviolent animal, so it prefers that over
   imperatives.
+license: GPL-3.0
+
+website: https://mergiraf.org
+source-code: https://codeberg.org/mergiraf/mergiraf.git
+issues: https://github.com/alexmurray/mergiraf-snap/issues
 
 grade: stable
 confinement: strict
