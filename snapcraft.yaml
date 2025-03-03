@@ -1,6 +1,6 @@
 name: mergiraf
 base: core24
-version: 0.5.1
+version: 0.6.0
 summary: A syntax-aware git merge driver
 description: |
   Mergiraf can solve [a wide range of Git merge
