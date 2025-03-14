@@ -1,0 +1,56 @@
+project: mergiraf-snap
+
+backends:
+  qemu:
+    systems:
+      # build via autopkgtest-buildvm-ubuntu-cloud and mv to ~/.spread/qemu/
+      - ubuntu-24.04-64:
+          username: ubuntu
+          password: ubuntu
+
+path: /spread/mergiraf-snap
+
+exclude:
+  - .git
+  - .github
+  - mergiraf*.snap
+
+environment:
+  CHANNEL/latest_stable: latest/stable
+  CHANNEL/latest_candidate: latest/candidate
+  CHANNEL/latest_beta: latest/beta
+  CHANNEL/latest_edge: latest/edge
+
+suites:
+  tests/:
+    summary: spread tests
+    prepare: |
+      # ensure machine is up to date
+      export DEBIAN_FRONTEND=noninteractive
+      # use apt-get to support older Ubuntu releases
+      apt-get update
+      apt-get -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" upgrade -y
+      # use apt-get to support older Ubuntu releases
+      apt-get autoremove --purge -y
+      apt install -y snapd git
+
+      # configure git
+      git config --global user.email "you@example.com"
+      git config --global user.name "You"
+
+      # configure git to use mergiraf
+      git config --global merge.mergiraf.name mergiraf
+      git config --global merge.mergiraf.driver 'mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L'
+      git config --global core.attributesfile ~/.gitattributes
+
+    prepare-each: |
+      snap install mergiraf --channel $CHANNEL
+      mergiraf languages --gitattributes > ~/.gitattributes
+
+    restore-each: |
+      snap remove mergiraf
+      rm -rf snap/mergiraf
+
+
+
+

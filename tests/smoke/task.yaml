@@ -1,0 +1,19 @@
+summary: basic smoke test
+
+prepare: |
+  # run in $HOME to ensure mergiraf snap has access to the repo etc
+  cd $HOME
+  git clone https://codeberg.org/mergiraf/example-repo
+
+restore: |
+  cd $HOME
+  rm -rf example-repo
+  rm -f merge.log
+
+execute: |
+  cd $HOME
+  # mergiraf will fail to merge some but make sure it got invoked
+  git -C example-repo merge origin/other-branch 1>merge.log 2>&1 || true
+  MATCH 'INFO Mergiraf: Solved 1 conflict' < merge.log
+  MATCH 'CONFLICT \(content\): Merge conflict in Example.json' < merge.log
+  rm -f merge.log
