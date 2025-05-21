@@ -34,4 +34,4 @@ parts:
   mergiraf:
     plugin: rust
     source: https://codeberg.org/mergiraf/mergiraf.git
-    source-tag: v$SNAPCRAFT_PROJECT_VERSION
+    source-tag: v$CRAFT_PROJECT_VERSION
