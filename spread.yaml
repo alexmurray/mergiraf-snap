@@ -16,10 +16,12 @@ exclude:
   - mergiraf*.snap
 
 environment:
+  
   CHANNEL/latest_stable: latest/stable
   CHANNEL/latest_candidate: latest/candidate
   CHANNEL/latest_beta: latest/beta
   CHANNEL/latest_edge: latest/edge
+  SNAP: mergiraf
 
 suites:
   tests/:
